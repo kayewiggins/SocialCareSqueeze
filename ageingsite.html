@@ -1,0 +1,54 @@
+<html>
+<div>
+<head>
+	<title> Social Care Calculator: How much is being spent caring for the elderly in your area? </title>
+	<link rel="stylesheet" type="text/css" href="ageingsite.css">
+	</head>
+<body>
+	<a href="http://jquery.com/">jQuery</a>
+    <script src="jquery-3.1.1.min.js"></script>
+    <header>
+	<p> SOCIAL CARE CALCULATOR </p>
+	</header>
+
+<div class = "headline">
+<p>DO WE STILL CARE?</p>
+</div>
+
+<div class = "intro"> 
+As the number of over-65s in the UK has increased over the past decade, the amount of money spent on their care has fallen. 
+<p>Find out what this means in your area.</p></div>
+
+</div>
+
+
+<div class="dropdown">
+  <button class="dropbtn">Choose your area<select id="sel">
+</select></button>
+  <div class="dropdown-content"> 
+  </div>
+</div>
+
+<div class="respond">
+<p>Here's how care spending has changed in your area:</p>
+</div>
+
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+<div class="england">
+<p>Here's what's happening across the whole of England: spending on care for over-65s is falling as the population grows</p>
+</div>
+
+<div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script src = "ageingsite.js"></script>
+
+
+
+		</body>
+</html>
