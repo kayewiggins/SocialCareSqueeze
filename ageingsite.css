@@ -87,25 +87,26 @@ display: block;
 	color: black;
 	display: block;
 }
+
+.respond{
+background-color: white;
+font-family: Georgia;
+    font-size: 15px;
+    width: 220px;
+
+}
+
+.england{
+background-color: white;
+font-family: Georgia;
+    font-size: 15px;
+    width: 300px;
+}
 /* Links inside the dropdown */
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
     display: block;
-}
-
-.target {
-	height: 10px;
-	width: 10px;
-	background-color: #ffdec6;
-    color: black;
-    padding: 30px 30px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
 }
 
 /* Change color of dropdown links on hover */
@@ -120,5 +121,7 @@ display: block;
 .dropdown:hover .dropbtn {
     background-color: #ffdec6;
 }
+
+
 
 
