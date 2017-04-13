@@ -92,7 +92,7 @@ display: block;
 background-color: white;
 font-family: Georgia;
     font-size: 15px;
-    width: 220px;
+    width: 350px;
 
 }
 
@@ -100,7 +100,7 @@ font-family: Georgia;
 background-color: white;
 font-family: Georgia;
     font-size: 15px;
-    width: 300px;
+    width: 1000px;
 }
 /* Links inside the dropdown */
 .dropdown-content a {
