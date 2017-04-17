@@ -1,10 +1,11 @@
 body{
 font-family: Lato, Arial, sans-serif;
+padding: 0;
 margin: 0;
 }
 
 body {
-    background-image: url("/Users/kayewiggins/Desktop/City/Data coding 2017/aa coding final project/Files/hands-981400.jpg");
+    background-image: url("/Users/kayewiggins/Desktop/City/Data coding 2017/aa coding final project/Files/Files final/hands-981400.jpg");
     margin-left: auto;
     margin-right: auto;
     background-size: 1500px 700px;
@@ -21,6 +22,16 @@ header {
 	text-align: center;
 	background: #ffdec6;
 	opacity: 0.9;
+}
+
+.all {
+    width: 100%;
+    max-width: 1500px;
+    height: 100%;
+    min-width: 1000px;
+    min-height: 1000px;
+    height: auto;
+    margin: 0 auto;
 }
 
 .headline {
@@ -58,6 +69,7 @@ header {
     margin-left: 600px;
     margin-right: auto;
     text-align: center;
+    opacity: 0.9;
 
 }
 
@@ -88,18 +100,28 @@ display: block;
 }
 
 .respond{
-background-color: white;
+background-color: #ffdec6;
 font-family: Georgia;
-    font-size: 15px;
-    width: 350px;
+    font-size: 19px;
+    width: auto;
+    padding: 20px 10px;
 
 }
 
 .england{
-background-color: white;
+background-color: #ffdec6;
 font-family: Georgia;
-    font-size: 15px;
-    width: 1000px;
+    font-size: 19px;
+    width: auto;
+    padding: 20px 10px;
+}
+
+.outro {
+    background-color: #ffdec6;
+font-family: Georgia;
+    font-size: 16px;
+    width: auto;
+    padding: 20px 10px;
 }
 /* Links inside the dropdown */
 .dropdown-content a {

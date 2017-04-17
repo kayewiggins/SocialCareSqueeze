@@ -1,8 +1,9 @@
-$(function() {
+$(document).ready(function()
+{
     var allData = 
 
     [
-    {
+  {
       "Area": "Select",
       "Area.code": "AAAAA",
     },
@@ -3028,189 +3029,274 @@ $(function() {
     "X2014.age": "23136",
     "X2015.age": "23711"
   }
-];
+    ];
 
+
+//make the drop-down list ||
     $.each(allData, function(i, option) {
-        $('#sel').append($('<option/>').attr("value", option.Area.code).text(option.Area));
+        $('#sel').append($('<option></option>').attr('value', option.Area).text(option.Area));
     });
-})
 
+//scroll to chart ||
+        $(".dropbtn").on("change", function() {
+           $('html, body').animate({
+                scrollTop: $(".respond").offset().top
+            }, 2000);
+        });
 
-$(".dropbtn").on("change", function() {
+//store the user's choice as a variable and set up makeCharts function ||
+        $(".dropbtn").on("change", function() {
+                var selectedOption = $('#sel option:selected').val();
+                makeCharts(selectedOption);
+        });            
 
-  
+        //define the makeChart function and know where to look for the data ||
+        function makeCharts(selectedOption) {
+        
+            var dataSpend = getDataSpend(allData, selectedOption);
 
-Highcharts.chart('container', { //Local area chart
-    chart: {
-      backgroundColor: '#fff7f1',
-        zoomType: 'xy'
-    },
-    title: {
-        text: 'The Social Care Squeeze: How spending on elderly care has fallen as the number of pensioners has grown'
-    },
-    subtitle: {
-        text: 'Source: Department for Communities and Local Government, Office for National Statistics'
-    },
-    xAxis: [{
-        categories: ['2008', '2009', '2010', '2011', '2012', '2013',
-            '2014', '2015'],
-        crosshair: true
-    }],
-    yAxis: [{ // Primary yAxis
+            var dataAge = getDataAge(allData, selectedOption);
 
-            min: 7000000,
-            max: 9000000,
-            labels: {
-            format: '{value}',
-            style: {
-                color: Highcharts.getOptions().colors[1]
+//find the right data ||
+function getDataSpend(array,placeName) { 
+            var i=0;
+            
+            for(i = 0; i < array.length; i++) {
+
+                var obj = array[i];
+
+                for (key in obj)
+                {
+                    if (obj[key] == placeName)
+                    {
+                        var eight = Number(obj["X2008.spend"]);
+                        var nine = Number(obj["X2009.spend"]);
+                        var ten = Number(obj["X2010.spend"]);
+                        var eleven = Number(obj["X2011.spend"]);
+                        var twelve = Number(obj["X2012.spend"]);
+                        var thirteen = Number(obj["X2013.spend"]);
+                        var fourteen = Number(obj["X2014.spend"]);
+                        var fifteen = Number(obj["X2015.spend"]);
+
+                        var dataSetSpend = [eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen];
+                        
+                        return dataSetSpend;
+                    }
+                }
             }
-        },
-        title: {
-            text: 'Amount spent (thousands)',
-            style: {
-                color: Highcharts.getOptions().colors[1]
-            }
-        },
+                        
+        }
+       
+        function getDataAge(array,placeName) {
+            var j=0;
+          
+            for(j = 0; j < array.length; j++) {
+                
+                var obj = array[j];
 
-        opposite: true
+                for (key in obj)
+                {
 
-    }, { // Secondary yAxis
-      min: 7000000,
-      max: 9000000,
-        title: {
-            text: 'Number of people aged 65+',
-            style: {
-                color: Highcharts.getOptions().colors[0]
+                    if (obj[key] == placeName)
+                    {
+                        var eightA = Number(obj["X2008.age"]);
+                        var nineA = Number(obj["X2009.age"]);
+                        var tenA = Number(obj["X2010.age"]);
+                        var elevenA = Number(obj["X2011.age"]);
+                        var twelveA = Number(obj["X2012.age"]);
+                        var thirteenA = Number(obj["X2013.age"]);
+                        var fourteenA = Number(obj["X2014.age"]);
+                        var fifteenA = Number(obj["X2015.age"]);
+
+                        var dataSetAge = [eightA,nineA,tenA,elevenA,twelveA,thirteenA,fourteenA,fifteenA];
+    
+                        
+                        return dataSetAge;
+                    }
+                }
             }
-        },
-        labels: {
-            format: '{value}',
-            style: {
-                color: Highcharts.getOptions().colors[0]
-            }
+            
         }
 
-    }, { 
-    }],
-    tooltip: {
-        shared: false
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'left',
-        x: 80,
-        verticalAlign: 'top',
-        y: 55,
-        floating: true,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-    },
-    series: [{
-        name: 'Number of people aged 65+',
-        type: 'column',
-        yAxis: 1,
-        data: [7864832,7995188,8137620,8267408,8569016,8795331,9007307,9167261],
-        tooltip: {
-            valueSuffix: ''
-        }
 
-    }, {
-        name: 'Amount spent on care for people aged 65+',
-        type: 'spline',
-        yAxis: 0,
-        data: [8799748,9368214,9408677,9255673,9282415,9316532,7806011,7614605.931],
-        tooltip: {
-            valueSuffix: '(thousands, GBP)'
-        }
-    }]
+            //design the charts ||
+            var dynamicChart = Highcharts.chart('container', { //Local area chart
+                chart: {
+                  backgroundColor: '#fff7f1',
+                    zoomType: 'xy'
+                },
+                title: {
+                    text: 'Care spending and the over-65 population in your local area'
+                },
+                subtitle: {
+                    text: 'Source: Department for Communities and Local Government, Office for National Statistics'
+                },
+                xAxis: [{
+                    categories: ['2008', '2009', '2010', '2011', '2012', '2013',
+                        '2014', '2015'],
+                    crosshair: true
+                }],
+                yAxis: [{ // Primary yAxis
+
+                        min: null,
+                        max: null,
+                        labels: {
+                        format: '{value}',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    title: {
+                        text: 'Amount spent (thousands, GBP)',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+
+                    opposite: true
+
+                }, { // Secondary yAxis
+                  min: null,
+                  max: null,
+                    title: {
+                        text: 'Number of people aged 65+',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    },
+                    labels: {
+                        format: '{value}',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    }
+
+                }, { 
+                }],
+                tooltip: {
+                    shared: false
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',
+                    x: 80,
+                    verticalAlign: 'top',
+                    y: 55,
+                    floating: true,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                },
+                series: [{
+                    name: 'Number of people aged 65+',
+                    type: 'column',
+                    
+                    yAxis: 1,
+                    data: dataAge,
+
+                    tooltip: {
+                        valueSuffix: ''
+                    }
+
+                }, {
+                    name: 'Amount spent on care for people aged 65+',
+                    type: 'spline',
+                    yAxis: 0,
+                    data: dataSpend,
+                    tooltip: {
+                        valueSuffix: '(thousands, GBP)'
+                    }
+                }]
+            });
+
+
+            Highcharts.chart('container2', { //England-wide chart 
+                chart: {
+                  backgroundColor: '#fff7f1',
+                    zoomType: 'xy'
+                },
+                title: {
+                    text: 'Care spending in England and the ageing population'
+                },
+                subtitle: {
+                    text: 'Source: Department for Communities and Local Government, Office for National Statistics'
+                },
+                xAxis: [{
+                    categories: ['2008', '2009', '2010', '2011', '2012', '2013',
+                        '2014', '2015'],
+                    crosshair: true
+                }],
+                yAxis: [{ // Primary yAxis
+
+                        min: 7000000,
+                        max: 9000000,
+                        labels: {
+                        format: '{value}',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+                    title: {
+                        text: 'Amount spent (thousands, GBP)',
+                        style: {
+                            color: Highcharts.getOptions().colors[1]
+                        }
+                    },
+
+                    opposite: true
+
+                }, { // Secondary yAxis
+                  min: 7000000,
+                  max: 9000000,
+                    title: {
+                        text: 'Number of people aged 65+',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    },
+                    labels: {
+                        format: '{value}',
+                        style: {
+                            color: Highcharts.getOptions().colors[0]
+                        }
+                    }
+
+                }, { 
+                }],
+                tooltip: {
+                    shared: false
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',
+                    x: 80,
+                    verticalAlign: 'top',
+                    y: 55,
+                    floating: true,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                },
+                series: [{
+                    name: 'Number of people aged 65+',
+                    type: 'column',
+                    yAxis: 1,
+                    data: [7864832,7995188,8137620,8267408,8569016,8795331,9007307,9167261],
+                    tooltip: {
+                        valueSuffix: ''
+                    }
+
+                }, {
+                    name: 'Amount spent on care for people aged 65+',
+                    type: 'spline',
+                    yAxis: 0,
+                    data: [8799748,9368214,9408677,9255673,9282415,9316532,7806011,7614605.931],
+                    tooltip: {
+                        valueSuffix: '(thousands, GBP)'
+                    }
+                }]
+            });
+        };
+
+        
+    
 });
 
-
-Highcharts.chart('container2', { //England-wide chart 
-    chart: {
-      backgroundColor: '#fff7f1',
-        zoomType: 'xy'
-    },
-    title: {
-        text: 'Care spending in England and the ageing population'
-    },
-    subtitle: {
-        text: 'Source: Department for Communities and Local Government, Office for National Statistics'
-    },
-    xAxis: [{
-        categories: ['2008', '2009', '2010', '2011', '2012', '2013',
-            '2014', '2015'],
-        crosshair: true
-    }],
-    yAxis: [{ // Primary yAxis
-
-            min: 7000000,
-            max: 9000000,
-            labels: {
-            format: '{value}',
-            style: {
-                color: Highcharts.getOptions().colors[1]
-            }
-        },
-        title: {
-            text: 'Amount spent (thousands)',
-            style: {
-                color: Highcharts.getOptions().colors[1]
-            }
-        },
-
-        opposite: true
-
-    }, { // Secondary yAxis
-      min: 7000000,
-      max: 9000000,
-        title: {
-            text: 'Number of people aged 65+',
-            style: {
-                color: Highcharts.getOptions().colors[0]
-            }
-        },
-        labels: {
-            format: '{value}',
-            style: {
-                color: Highcharts.getOptions().colors[0]
-            }
-        }
-
-    }, { 
-    }],
-    tooltip: {
-        shared: false
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'left',
-        x: 80,
-        verticalAlign: 'top',
-        y: 55,
-        floating: true,
-        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-    },
-    series: [{
-        name: 'Number of people aged 65+',
-        type: 'column',
-        yAxis: 1,
-        data: [7864832,7995188,8137620,8267408,8569016,8795331,9007307,9167261],
-        tooltip: {
-            valueSuffix: ''
-        }
-
-    }, {
-        name: 'Amount spent on care for people aged 65+',
-        type: 'spline',
-        yAxis: 0,
-        data: [8799748,9368214,9408677,9255673,9282415,9316532,7806011,7614605.931],
-        tooltip: {
-            valueSuffix: '(thousands, GBP)'
-        }
-    }]
-});
-
-});
 
 
